@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { normalizePart } from './normalize.js';
-import { CANVAS_W, CANVAS_H } from './constants.js';
+import { CANVAS_W, CANVAS_H, HEAD_CHIN_ROW } from './constants.js';
 
 describe('normalizePart', () => {
   it('pads uneven rows to uniform width', () => {
@@ -46,5 +46,15 @@ describe('normalizePart', () => {
         rows: [],
       })
     ).toThrow(/no rows/);
+  });
+
+  it('bottom-aligns head parts to HEAD_CHIN_ROW', () => {
+    const part = normalizePart({
+      id: 'short',
+      category: 'head',
+      anchor: { x: 2, y: 5 },
+      rows: ['  .--.  ', ' /    \\ ', " '----' "],
+    });
+    expect(part.anchor.y).toBe(HEAD_CHIN_ROW - 2);
   });
 });

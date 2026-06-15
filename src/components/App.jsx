@@ -4,6 +4,7 @@ import { composite } from '../engine/composite.js';
 import { LAYER_ORDER } from '../engine/constants.js';
 import { decode, encode } from '../engine/serialize.js';
 import { useFaceState } from '../state/useFaceState.js';
+import { AsciiTitle } from './AsciiTitle.jsx';
 import { Canvas } from './Canvas.jsx';
 import { CategoryTabs } from './CategoryTabs.jsx';
 import { Gallery } from './Gallery.jsx';
@@ -28,11 +29,10 @@ function readSelectionFromHash(partsById, defaults) {
 function ManifestError({ error }) {
   return (
     <div className="fatal-error">
-      <h1>Could not load face parts</h1>
+      <pre className="terminal-rule">{'!'.repeat(42)}</pre>
+      <p>{'ERR: could not load parts.json'}</p>
       <p>{error.message}</p>
-      <p className="fatal-hint">
-        Check <code>src/data/parts.json</code> for invalid or overflowing parts.
-      </p>
+      <p className="fatal-hint">{'> check src/data/parts.json'}</p>
     </div>
   );
 }
@@ -40,8 +40,9 @@ function ManifestError({ error }) {
 function FaceEditor({ partsById, partsByCategory, defaults }) {
   const [activeCategory, setActiveCategory] = useState('head');
   const [copyStatus, setCopyStatus] = useState('');
-  const { selection, select, undo, redo, replaceSelection, canUndo, canRedo } =
-    useFaceState(readSelectionFromHash(partsById, defaults));
+  const { selection, select, replaceSelection } = useFaceState(
+    readSelectionFromHash(partsById, defaults)
+  );
 
   useEffect(() => {
     const syncFromHash = () =>
@@ -78,61 +79,54 @@ function FaceEditor({ partsById, partsByCategory, defaults }) {
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(face);
-      showStatus('Face copied!');
+      showStatus('OK: face copied to clipboard');
     } catch {
-      showStatus('Copy failed');
-    }
-  };
-
-  const copyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      showStatus('Link copied!');
-    } catch {
-      showStatus('Copy failed');
+      showStatus('ERR: copy failed');
     }
   };
 
   return (
     <div className="app">
-      <header className="app-header">
-        <h1>ASCII Facemaker</h1>
-        <p className="tagline">Build a face by picking parts from the gallery.</p>
-      </header>
+      <AsciiTitle />
 
       <main className="app-main">
-        <div className="editor-panel">
-          <Canvas face={face} />
+        <Canvas face={face} />
 
-          <div className="toolbar">
-            <button type="button" onClick={undo} disabled={!canUndo}>
-              Undo
-            </button>
-            <button type="button" onClick={redo} disabled={!canRedo}>
-              Redo
-            </button>
-            <button type="button" onClick={copyToClipboard}>
-              Copy face
-            </button>
-            <button type="button" onClick={copyLink}>
-              Copy link
-            </button>
-            {copyStatus && <span className="copy-status">{copyStatus}</span>}
-          </div>
-
+        <div className="picker-panel">
           <CategoryTabs
             activeCategory={activeCategory}
             onCategoryChange={setActiveCategory}
           />
+
+          <Gallery
+            partsByCategory={partsByCategory}
+            partsById={partsById}
+            selection={selection}
+            activeCategory={activeCategory}
+            select={select}
+          />
         </div>
 
-        <Gallery
-          partsByCategory={partsByCategory}
-          partsById={partsById}
-          selection={selection}
-          activeCategory={activeCategory}
-          select={select}
-        />
+        <div className="toolbar" role="toolbar" aria-label="Face actions">
+          <p className="terminal-label">{'// commands'}</p>
+          <div className="toolbar-row">
+            <span
+              role="button"
+              tabIndex={0}
+              className="copy-btn"
+              onClick={copyToClipboard}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  copyToClipboard();
+                }
+              }}
+            >
+              [c] copy
+            </span>
+          </div>
+          {copyStatus && <p className="terminal-status">{copyStatus}</p>}
+        </div>
       </main>
     </div>
   );

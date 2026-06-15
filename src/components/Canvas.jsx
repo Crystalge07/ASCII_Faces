@@ -1,13 +1,12 @@
-import { composite } from '../engine/composite.js';
-
 /** @param {{ face: string }} props */
 export function Canvas({ face }) {
   return (
-    <section className="canvas-section">
-      <h2 className="section-label">Your face</h2>
-      <pre className="ascii-face canvas-face" aria-label="Current ASCII face">
-        {face}
-      </pre>
+    <section className="canvas-section" aria-label="Current ASCII face">
+      <pre className="terminal-frame-top">{'+--[ output ]' + '-'.repeat(26) + '+'}</pre>
+      <div className="canvas-stage">
+        <pre className="ascii-face canvas-face">{face}</pre>
+      </div>
+      <pre className="terminal-frame-bottom">{'+' + '-'.repeat(38) + '+'}</pre>
     </section>
   );
 }

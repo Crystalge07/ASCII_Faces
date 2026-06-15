@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { composite } from './composite.js';
-import { CANVAS_W, CANVAS_H } from './constants.js';
+import { CANVAS_W, CANVAS_H, HEAD_CHIN_ROW } from './constants.js';
 import { normalizePart } from './normalize.js';
 
 describe('composite', () => {
@@ -40,11 +40,11 @@ describe('composite', () => {
     const eyes = normalizePart({
       id: 'eyes',
       category: 'eyes',
-      anchor: { x: 1, y: 0 },
+      anchor: { x: 1, y: HEAD_CHIN_ROW },
       rows: [' o '],
     });
     const result = composite([head, eyes]);
-    expect(result.split('\n')[0].slice(0, 4)).toBe('##o#');
+    expect(result.split('\n')[HEAD_CHIN_ROW].slice(0, 4)).toBe('##o#');
   });
 
   it('clips parts at the canvas edge', () => {

@@ -1,4 +1,18 @@
-import { CANVAS_W, CANVAS_H } from './constants.js';
+import { CANVAS_W, CANVAS_H, HEAD_CHIN_ROW } from './constants.js';
+
+/** @param {string[]} rows */
+function inkBounds(rows) {
+  let inkTop = rows.length;
+  let inkBottom = -1;
+  for (let i = 0; i < rows.length; i++) {
+    if ([...rows[i]].some((ch) => ch !== ' ')) {
+      inkTop = Math.min(inkTop, i);
+      inkBottom = i;
+    }
+  }
+  if (inkBottom === -1) throw new Error('part has no visible ink');
+  return { inkTop, inkBottom };
+}
 
 /**
  * @typedef {import('../data/parts.types.ts').RawPart} RawPart
@@ -24,16 +38,22 @@ export function normalizePart(p) {
   const height = p.rows.length;
   const rows = p.rows.map((r) => r.padEnd(width, ' '));
 
+  let anchor = { ...p.anchor };
+  if (p.category === 'head') {
+    const { inkBottom } = inkBounds(rows);
+    anchor = { ...anchor, y: HEAD_CHIN_ROW - inkBottom };
+  }
+
   // bounds check against canvas
   if (
-    p.anchor.x < 0 ||
-    p.anchor.y < 0 ||
-    p.anchor.x + width > CANVAS_W ||
-    p.anchor.y + height > CANVAS_H
+    anchor.x < 0 ||
+    anchor.y < 0 ||
+    anchor.x + width > CANVAS_W ||
+    anchor.y + height > CANVAS_H
   )
     throw new Error(
-      `part ${p.id} overflows canvas at anchor ${JSON.stringify(p.anchor)}`
+      `part ${p.id} overflows canvas at anchor ${JSON.stringify(anchor)}`
     );
 
-  return { ...p, width, height, rows };
+  return { ...p, anchor, width, height, rows };
 }

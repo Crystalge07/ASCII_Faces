@@ -14,12 +14,10 @@ export class ErrorBoundary extends Component {
     if (this.state.error) {
       return (
         <div className="fatal-error">
-          <h1>Something went wrong</h1>
+          <pre className="terminal-rule">{'!'.repeat(42)}</pre>
+          <p>{'ERR: runtime failure'}</p>
           <p>{this.state.error.message}</p>
-          <p className="fatal-hint">
-            Open the browser console for details, or restart with{' '}
-            <code>npm run dev</code>.
-          </p>
+          <p className="fatal-hint">{'> reload the page or run npm run dev'}</p>
         </div>
       );
     }

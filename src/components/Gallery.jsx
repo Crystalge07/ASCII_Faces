@@ -24,7 +24,6 @@ export function Gallery({
 
   return (
     <section className="gallery-section">
-      <h2 className="section-label">Pick a {activeCategory} variant</h2>
       <div className="gallery" role="listbox" aria-label={`${activeCategory} variants`}>
         {variants.map((variant) => {
           const preview = composite([...others, variant]);
@@ -35,11 +34,13 @@ export function Gallery({
               type="button"
               role="option"
               aria-selected={isSelected}
+              aria-label={variant.id}
               className={isSelected ? 'variant selected' : 'variant'}
               onClick={() => select(activeCategory, variant.id)}
             >
-              <pre className="ascii-face variant-preview">{preview}</pre>
-              <span className="variant-id">{variant.id}</span>
+              <div className="variant-frame">
+                <pre className="ascii-face variant-preview">{preview}</pre>
+              </div>
             </button>
           );
         })}

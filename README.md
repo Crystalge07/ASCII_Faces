@@ -1,4 +1,4 @@
-# ASCII Facemaker
+# Textface
 
 A browser tool for building ASCII-art faces by picking parts (head, hair, eyes, nose, mouth) from a gallery. Client-only — no backend.
 
