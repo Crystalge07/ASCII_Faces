@@ -69,7 +69,7 @@ describe('parts manifest', () => {
   });
 
   it('horizontally centers heads and features on FACE_CENTER_X', () => {
-    const symmetric = new Set(['eyes', 'mouth', 'hair', 'facial_hair']);
+    const symmetric = new Set(['eyes', 'hair', 'facial_hair']);
 
     for (const part of manifest.parts.map(normalizePart)) {
       if (!part.rows.some((line) => [...line].some((ch) => ch !== ' '))) continue;
@@ -92,6 +92,18 @@ describe('parts manifest', () => {
       });
       const inkCenter = part.anchor.x + (inkLeft + inkRight) / 2;
       expect(Math.abs(inkCenter - FACE_CENTER_X)).toBeLessThanOrEqual(0.5);
+
+      if (part.category === 'mouth') {
+        const inkWidth = inkRight - inkLeft + 1;
+        expect(inkWidth % 2).toBe(0);
+        expect(inkCenter).toBe(FACE_CENTER_X);
+      }
+
+      if (part.category === 'nose' && part.id !== 'nose_curl_01') {
+        const inkWidth = inkRight - inkLeft + 1;
+        expect(inkWidth % 2).toBe(0);
+        expect(inkCenter).toBe(FACE_CENTER_X);
+      }
     }
   });
 });

@@ -31,7 +31,12 @@ function inkBounds(rows) {
 
 /** @param {number} inkLeft @param {number} inkRight */
 function centeredAnchorX(inkLeft, inkRight) {
-  return Math.round(FACE_CENTER_X - (inkLeft + inkRight) / 2);
+  const inkCenter = (inkLeft + inkRight) / 2;
+  const idealAnchor = FACE_CENTER_X - inkCenter;
+  const inkSpan = inkRight - inkLeft + 1;
+  // Odd spans can't sit on 9.5; bias left so ink straddles cols 9–10.
+  if (inkSpan % 2 === 1) return Math.floor(idealAnchor + 1e-9);
+  return Math.round(idealAnchor);
 }
 
 /** Center a part's full row width on the face (symmetric features). */
@@ -39,12 +44,9 @@ function centeredAnchorXByWidth(width) {
   return Math.round(FACE_CENTER_X - (width - 1) / 2);
 }
 
-const SYMMETRIC_FACE_CATEGORIES = new Set([
-  'eyes',
-  'mouth',
-  'hair',
-  'facial_hair',
-]);
+const SYMMETRIC_FACE_CATEGORIES = new Set(['eyes', 'hair', 'facial_hair']);
+
+const INK_CENTERED_FACE_CATEGORIES = new Set(['nose', 'mouth']);
 
 /**
  * @typedef {import('../data/parts.types.ts').RawPart} RawPart
@@ -78,11 +80,13 @@ export function normalizePart(p) {
         x: centeredAnchorX(bounds.inkLeft, bounds.inkRight),
         y: HEAD_CHIN_ROW - bounds.inkBottom,
       };
-    } else if (p.category === 'nose') {
-      anchor = {
-        ...anchor,
-        x: centeredAnchorX(bounds.inkLeft, bounds.inkRight),
-      };
+    } else if (INK_CENTERED_FACE_CATEGORIES.has(p.category)) {
+      if (p.id !== 'nose_curl_01') {
+        anchor = {
+          ...anchor,
+          x: centeredAnchorX(bounds.inkLeft, bounds.inkRight),
+        };
+      }
     } else if (SYMMETRIC_FACE_CATEGORIES.has(p.category)) {
       anchor = {
         ...anchor,
