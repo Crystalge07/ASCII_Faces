@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { normalizePart } from './normalize.js';
-import { CANVAS_W, CANVAS_H, HEAD_CHIN_ROW } from './constants.js';
+import { CANVAS_W, CANVAS_H, HEAD_CHIN_ROW, FACE_CENTER_X } from './constants.js';
 
 describe('normalizePart', () => {
   it('pads uneven rows to uniform width', () => {
@@ -31,8 +31,8 @@ describe('normalizePart', () => {
       normalizePart({
         id: 'overflow',
         category: 'head',
-        anchor: { x: CANVAS_W - 1, y: 0 },
-        rows: ['AB'],
+        anchor: { x: 0, y: 0 },
+        rows: ['A'.repeat(CANVAS_W + 1)],
       })
     ).toThrow(/overflows canvas/);
   });
@@ -56,5 +56,15 @@ describe('normalizePart', () => {
       rows: ['  .--.  ', ' /    \\ ', " '----' "],
     });
     expect(part.anchor.y).toBe(HEAD_CHIN_ROW - 2);
+  });
+
+  it('horizontally centers face features on FACE_CENTER_X', () => {
+    const eyes = normalizePart({
+      id: 'eyes',
+      category: 'eyes',
+      anchor: { x: 0, y: 5 },
+      rows: ['.    .'],
+    });
+    expect(eyes.anchor.x + 2.5).toBe(FACE_CENTER_X);
   });
 });

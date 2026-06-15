@@ -1,17 +1,28 @@
-import { CANVAS_W, CANVAS_H, HEAD_CHIN_ROW } from './constants.js';
+import { CANVAS_W, CANVAS_H, HEAD_CHIN_ROW, FACE_CENTER_X } from './constants.js';
 
 /** @param {string[]} rows */
 function inkBounds(rows) {
   let inkTop = rows.length;
   let inkBottom = -1;
+  let inkLeft = Infinity;
+  let inkRight = -1;
   for (let i = 0; i < rows.length; i++) {
-    if ([...rows[i]].some((ch) => ch !== ' ')) {
-      inkTop = Math.min(inkTop, i);
-      inkBottom = i;
+    for (let j = 0; j < rows[i].length; j++) {
+      if (rows[i][j] !== ' ') {
+        inkTop = Math.min(inkTop, i);
+        inkBottom = i;
+        inkLeft = Math.min(inkLeft, j);
+        inkRight = Math.max(inkRight, j);
+      }
     }
   }
   if (inkBottom === -1) throw new Error('part has no visible ink');
-  return { inkTop, inkBottom };
+  return { inkTop, inkBottom, inkLeft, inkRight };
+}
+
+/** @param {number} inkLeft @param {number} inkRight */
+function centeredAnchorX(inkLeft, inkRight) {
+  return Math.round(FACE_CENTER_X - (inkLeft + inkRight) / 2);
 }
 
 /**
@@ -39,9 +50,18 @@ export function normalizePart(p) {
   const rows = p.rows.map((r) => r.padEnd(width, ' '));
 
   let anchor = { ...p.anchor };
+  const bounds = inkBounds(rows);
+
   if (p.category === 'head') {
-    const { inkBottom } = inkBounds(rows);
-    anchor = { ...anchor, y: HEAD_CHIN_ROW - inkBottom };
+    anchor = {
+      x: centeredAnchorX(bounds.inkLeft, bounds.inkRight),
+      y: HEAD_CHIN_ROW - bounds.inkBottom,
+    };
+  } else if (p.category === 'eyes' || p.category === 'nose' || p.category === 'mouth') {
+    anchor = {
+      ...anchor,
+      x: centeredAnchorX(bounds.inkLeft, bounds.inkRight),
+    };
   }
 
   // bounds check against canvas

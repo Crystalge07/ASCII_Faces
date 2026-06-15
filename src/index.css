@@ -59,7 +59,7 @@ body {
   margin: 0;
   display: inline-block;
   font-family: var(--mono);
-  font-size: clamp(0.38rem, 1.4vw, 0.52rem);
+  font-size: clamp(0.48rem, 1.75vw, 0.65rem);
   line-height: 1.05;
   white-space: pre;
   overflow: hidden;
@@ -164,7 +164,7 @@ body {
 }
 
 .copy-btn {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .copy-btn:hover,

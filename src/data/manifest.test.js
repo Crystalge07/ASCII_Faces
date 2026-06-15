@@ -3,7 +3,7 @@ import Ajv from 'ajv';
 import manifest from '../data/parts.json';
 import schema from '../data/parts.schema.json';
 import { normalizePart } from '../engine/normalize.js';
-import { HEAD_CHIN_ROW } from '../engine/constants.js';
+import { HEAD_CHIN_ROW, FACE_CENTER_X } from '../engine/constants.js';
 
 describe('parts manifest', () => {
   it('validates against parts.schema.json', () => {
@@ -65,6 +65,27 @@ describe('parts manifest', () => {
         if ([...line].some((ch) => ch !== ' ')) inkBottom = i;
       });
       expect(head.anchor.y + inkBottom).toBe(HEAD_CHIN_ROW);
+    }
+  });
+
+  it('horizontally centers heads and features on FACE_CENTER_X', () => {
+    const centered = manifest.parts
+      .filter((p) => ['head', 'eyes', 'nose', 'mouth'].includes(p.category))
+      .map(normalizePart);
+
+    for (const part of centered) {
+      let inkLeft = Infinity;
+      let inkRight = -1;
+      part.rows.forEach((line) => {
+        [...line].forEach((ch, i) => {
+          if (ch !== ' ') {
+            inkLeft = Math.min(inkLeft, i);
+            inkRight = Math.max(inkRight, i);
+          }
+        });
+      });
+      const inkCenter = part.anchor.x + (inkLeft + inkRight) / 2;
+      expect(Math.abs(inkCenter - FACE_CENTER_X)).toBeLessThanOrEqual(0.5);
     }
   });
 });

@@ -23,11 +23,13 @@ describe('composite', () => {
     const mouth = normalizePart({
       id: 'mouth',
       category: 'mouth',
-      anchor: { x: 0, y: 0 },
+      anchor: { x: 0, y: HEAD_CHIN_ROW },
       rows: ['oooo'],
     });
     const result = composite([mouth, head]);
-    expect(result.split('\n')[0].slice(0, 4)).toBe('oooo');
+    expect(result.split('\n')[HEAD_CHIN_ROW].slice(head.anchor.x, head.anchor.x + 4)).toBe(
+      'oooo'
+    );
   });
 
   it('treats spaces in parts as transparent', () => {
@@ -44,7 +46,9 @@ describe('composite', () => {
       rows: [' o '],
     });
     const result = composite([head, eyes]);
-    expect(result.split('\n')[HEAD_CHIN_ROW].slice(0, 4)).toBe('##o#');
+    expect(
+      result.split('\n')[HEAD_CHIN_ROW].slice(head.anchor.x, head.anchor.x + 4)
+    ).toBe('##o#');
   });
 
   it('clips parts at the canvas edge', () => {

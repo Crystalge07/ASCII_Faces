@@ -10,4 +10,7 @@ export const TRANSPARENT_CHAR = ' '; // a space in a part = leave cell underneat
 // Canvas row where the bottom ink line of every head should land (0-indexed).
 export const HEAD_CHIN_ROW = 10;
 
+// Horizontal center of the face canvas (between columns 9 and 10 on a 20-wide grid).
+export const FACE_CENTER_X = (CANVAS_W - 1) / 2;
+
 // TODO: introduce a sentinel char (e.g. backtick) to force-paint opaque spaces.
