@@ -1,0 +1,165 @@
+{
+  "categories": ["head", "hair", "eyes", "nose", "mouth"],
+  "parts": [
+    {
+      "id": "head_round_01",
+      "category": "head",
+      "anchor": { "x": 4, "y": 2 },
+      "rows": [
+        "    .-------.    ",
+        "   /         \\   ",
+        "  |           |  ",
+        "  |           |  ",
+        "  |           |  ",
+        "   \\         /   ",
+        "    '-------'    "
+      ]
+    },
+    {
+      "id": "head_square_01",
+      "category": "head",
+      "anchor": { "x": 4, "y": 2 },
+      "rows": [
+        "    +-------+    ",
+        "    |       |    ",
+        "    |       |    ",
+        "    |       |    ",
+        "    |       |    ",
+        "    |       |    ",
+        "    +-------+    "
+      ]
+    },
+    {
+      "id": "head_oval_01",
+      "category": "head",
+      "anchor": { "x": 5, "y": 2 },
+      "rows": [
+        "   .---------.   ",
+        "  /           \\  ",
+        " |             | ",
+        " |             | ",
+        " |             | ",
+        "  \\           /  ",
+        "   '---------'   "
+      ]
+    },
+
+    {
+      "id": "hair_short_01",
+      "category": "hair",
+      "anchor": { "x": 4, "y": 0 },
+      "rows": [
+        "    ,-------,    ",
+        "   /  /   \\  \\   ",
+        "  /  /     \\  \\  "
+      ]
+    },
+    {
+      "id": "hair_messy_01",
+      "category": "hair",
+      "anchor": { "x": 3, "y": 0 },
+      "rows": [
+        "   /\\/\\/\\/\\/\\   ",
+        "  /  \\ / \\  \\  ",
+        " /    X   X    \\ "
+      ]
+    },
+    {
+      "id": "hair_bald_01",
+      "category": "hair",
+      "anchor": { "x": 10, "y": 0 },
+      "rows": ["  "]
+    },
+    {
+      "id": "hair_spiky_01",
+      "category": "hair",
+      "anchor": { "x": 4, "y": 0 },
+      "rows": [
+        "    /\\ /\\ /\\    ",
+        "   /  X   X  \\   ",
+        "  /           \\  "
+      ]
+    },
+
+    {
+      "id": "eyes_round_01",
+      "category": "eyes",
+      "anchor": { "x": 7, "y": 5 },
+      "rows": ["( o   o )"]
+    },
+    {
+      "id": "eyes_dot_01",
+      "category": "eyes",
+      "anchor": { "x": 8, "y": 5 },
+      "rows": [". .   . ."]
+    },
+    {
+      "id": "eyes_line_01",
+      "category": "eyes",
+      "anchor": { "x": 7, "y": 5 },
+      "rows": ["( -   - )"]
+    },
+    {
+      "id": "eyes_wide_01",
+      "category": "eyes",
+      "anchor": { "x": 6, "y": 5 },
+      "rows": ["( O   O )"]
+    },
+    {
+      "id": "eyes_wink_01",
+      "category": "eyes",
+      "anchor": { "x": 7, "y": 5 },
+      "rows": ["( o   - )"]
+    },
+
+    {
+      "id": "nose_small_01",
+      "category": "nose",
+      "anchor": { "x": 11, "y": 7 },
+      "rows": ["|"]
+    },
+    {
+      "id": "nose_dot_01",
+      "category": "nose",
+      "anchor": { "x": 11, "y": 7 },
+      "rows": ["."]
+    },
+    {
+      "id": "nose_triangle_01",
+      "category": "nose",
+      "anchor": { "x": 10, "y": 7 },
+      "rows": [" \\|/ "]
+    },
+
+    {
+      "id": "mouth_smile_01",
+      "category": "mouth",
+      "anchor": { "x": 8, "y": 9 },
+      "rows": [" \\___/ "]
+    },
+    {
+      "id": "mouth_flat_01",
+      "category": "mouth",
+      "anchor": { "x": 8, "y": 9 },
+      "rows": [" ----- "]
+    },
+    {
+      "id": "mouth_open_01",
+      "category": "mouth",
+      "anchor": { "x": 9, "y": 9 },
+      "rows": ["  O  "]
+    },
+    {
+      "id": "mouth_frown_01",
+      "category": "mouth",
+      "anchor": { "x": 8, "y": 9 },
+      "rows": [" /---\\ "]
+    },
+    {
+      "id": "mouth_smirk_01",
+      "category": "mouth",
+      "anchor": { "x": 8, "y": 9 },
+      "rows": [" \\__- "]
+    }
+  ]
+}
