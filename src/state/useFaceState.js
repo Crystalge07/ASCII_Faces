@@ -41,12 +41,19 @@ export function useFaceState(initial) {
     setSelection(next);
   }, []);
 
+  const applySelection = useCallback((next) => {
+    setPast((p) => [...p, selection]);
+    setFuture([]);
+    setSelection(next);
+  }, [selection]);
+
   return {
     selection,
     select,
     undo,
     redo,
     replaceSelection,
+    applySelection,
     canUndo: past.length > 0,
     canRedo: future.length > 0,
   };

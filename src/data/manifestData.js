@@ -1,6 +1,7 @@
 import manifest from './parts.json';
 import { CATEGORY_ORDER } from '../engine/constants.js';
 import { normalizePart } from '../engine/normalize.js';
+import { SECRET_PART_IDS } from '../engine/secretParts.js';
 
 /** @returns {{ ok: true, partsById: Record<string, object>, partsByCategory: Record<string, object[]>, defaults: Record<string, string> } | { ok: false, error: Error }} */
 export function loadManifestData() {
@@ -8,7 +9,9 @@ export function loadManifestData() {
     const normalizedParts = manifest.parts.map(normalizePart);
     const partsById = Object.fromEntries(normalizedParts.map((p) => [p.id, p]));
     const partsByCategory = CATEGORY_ORDER.reduce((acc, cat) => {
-      acc[cat] = normalizedParts.filter((p) => p.category === cat);
+      acc[cat] = normalizedParts.filter(
+        (p) => p.category === cat && !SECRET_PART_IDS.has(p.id)
+      );
       return acc;
     }, /** @type {Record<string, typeof normalizedParts>} */ ({}));
 

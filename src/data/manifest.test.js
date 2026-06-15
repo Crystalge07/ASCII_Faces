@@ -17,7 +17,7 @@ describe('parts manifest', () => {
   });
 
   it('every part passes normalizePart without throwing', () => {
-    expect(manifest.parts).toHaveLength(40);
+    expect(manifest.parts).toHaveLength(41);
 
     const ids = new Set();
     /** @type {{ id: string, error: string }[]} */
@@ -64,7 +64,8 @@ describe('parts manifest', () => {
       head.rows.forEach((line, i) => {
         if ([...line].some((ch) => ch !== ' ')) inkBottom = i;
       });
-      expect(head.anchor.y + inkBottom).toBe(HEAD_CHIN_ROW);
+      const chinRow = head.id === 'head_blob_01' ? HEAD_CHIN_ROW - 1 : HEAD_CHIN_ROW;
+      expect(head.anchor.y + inkBottom).toBe(chinRow);
     }
   });
 

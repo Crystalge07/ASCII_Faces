@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { loadManifestData } from '../data/manifestData.js';
 import { composite } from '../engine/composite.js';
 import { LAYER_ORDER, CATEGORY_ORDER } from '../engine/constants.js';
 import { decode, encode } from '../engine/serialize.js';
+import { randomSelection } from '../engine/randomFace.js';
 import { useFaceState } from '../state/useFaceState.js';
 import { AsciiTitle } from './AsciiTitle.jsx';
 import { Canvas } from './Canvas.jsx';
@@ -40,7 +41,7 @@ function ManifestError({ error }) {
 function FaceEditor({ partsById, partsByCategory, defaults }) {
   const [activeCategory, setActiveCategory] = useState('head');
   const [copyStatus, setCopyStatus] = useState('');
-  const { selection, select, replaceSelection } = useFaceState(
+  const { selection, select, replaceSelection, applySelection } = useFaceState(
     readSelectionFromHash(partsById, defaults)
   );
 
@@ -71,19 +72,51 @@ function FaceEditor({ partsById, partsByCategory, defaults }) {
 
   const face = useMemo(() => composite(selectedParts), [selectedParts]);
 
-  const showStatus = (message) => {
+  const showStatus = useCallback((message) => {
     setCopyStatus(message);
     window.setTimeout(() => setCopyStatus(''), 2000);
-  };
+  }, []);
 
-  const copyToClipboard = async () => {
+  const copyToClipboard = useCallback(async () => {
+    window.getSelection()?.removeAllRanges();
     try {
       await navigator.clipboard.writeText(face);
       showStatus('OK: face copied to clipboard');
     } catch {
       showStatus('ERR: copy failed');
     }
-  };
+  }, [face, showStatus]);
+
+  const randomizeFace = useCallback(() => {
+    applySelection(randomSelection(partsByCategory));
+    showStatus('OK: random face generated');
+  }, [applySelection, partsByCategory, showStatus]);
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const target = e.target;
+      if (
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        (target instanceof HTMLElement && target.isContentEditable)
+      ) {
+        return;
+      }
+
+      const key = e.key.toLowerCase();
+      if (key === 'c') {
+        e.preventDefault();
+        copyToClipboard();
+      } else if (key === 'r') {
+        e.preventDefault();
+        randomizeFace();
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [copyToClipboard, randomizeFace]);
 
   return (
     <div className="app">
@@ -120,7 +153,11 @@ function FaceEditor({ partsById, partsByCategory, defaults }) {
               role="button"
               tabIndex={0}
               className="copy-btn"
-              onClick={copyToClipboard}
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={(e) => {
+                e.preventDefault();
+                copyToClipboard();
+              }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
@@ -129,6 +166,24 @@ function FaceEditor({ partsById, partsByCategory, defaults }) {
               }}
             >
               [c] copy
+            </span>
+            <span
+              role="button"
+              tabIndex={0}
+              className="copy-btn"
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={(e) => {
+                e.preventDefault();
+                randomizeFace();
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  randomizeFace();
+                }
+              }}
+            >
+              [r] random
             </span>
           </div>
           {copyStatus && <p className="terminal-status">{copyStatus}</p>}

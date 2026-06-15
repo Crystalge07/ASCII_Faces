@@ -101,7 +101,15 @@ body {
 
 .gallery-section {
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
+}
+
+.gallery-wrap {
+  position: relative;
+  width: 100%;
+  font-size: var(--preview-size);
+  --variant-w: calc(var(--canvas-cols) * 1ch);
+  --gallery-gap: 0.75rem;
 }
 
 .terminal-frame-top,
@@ -270,6 +278,7 @@ body {
   line-height: var(--ui-line);
   white-space: pre;
   color: var(--ink);
+  user-select: none;
 }
 
 .variant-preview {
@@ -277,4 +286,59 @@ body {
   width: calc(var(--canvas-cols) * 1ch);
   height: calc(var(--canvas-rows) * var(--ui-line) * var(--preview-size));
   margin: 0;
+}
+
+/* Secret blob head — same gap as gallery; fades in on hover, no slide. */
+.variant-secret-wrap {
+  position: absolute;
+  top: 0;
+  left: calc(50% + 2.5 * var(--variant-w) + 3 * var(--gallery-gap));
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--variant-w);
+}
+
+.variant-secret-wrap .variant.variant-secret {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+}
+
+.variant-secret-wrap:hover .variant.variant-secret,
+.variant-secret-wrap:focus-within .variant.variant-secret {
+  opacity: 0.42;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.variant-secret-wrap:hover .variant.variant-secret.selected,
+.variant-secret-wrap:focus-within .variant.variant-secret.selected {
+  opacity: 0.6;
+}
+
+.variant-secret-wrap .secret-unlock-msg {
+  margin: 0.35rem 0 0;
+  max-width: var(--variant-w);
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--ink);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+}
+
+.variant-secret-wrap:hover .secret-unlock-msg,
+.variant-secret-wrap:focus-within .secret-unlock-msg {
+  opacity: 0.55;
+  visibility: visible;
 }

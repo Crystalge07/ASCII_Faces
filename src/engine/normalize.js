@@ -76,9 +76,13 @@ export function normalizePart(p) {
   if (hasInk(rows)) {
     const bounds = inkBounds(rows);
     if (p.category === 'head') {
+      const chinRow =
+        p.id === 'head_blob_01'
+          ? HEAD_CHIN_ROW - 1
+          : HEAD_CHIN_ROW;
       anchor = {
         x: centeredAnchorX(bounds.inkLeft, bounds.inkRight),
-        y: HEAD_CHIN_ROW - bounds.inkBottom,
+        y: chinRow - bounds.inkBottom,
       };
     } else if (INK_CENTERED_FACE_CATEGORIES.has(p.category)) {
       if (p.id !== 'nose_curl_01') {
