@@ -1,15 +1,8 @@
 import { CANVAS_W, CANVAS_H } from './constants.js';
 
 /**
- * @typedef {Object} RawPart
- * @property {string} id
- * @property {string} category
- * @property {{ x: number, y: number }} anchor
- * @property {string[]} rows
- */
-
-/**
- * @typedef {RawPart & { width: number, height: number }} NormalizedPart
+ * @typedef {import('../data/parts.types.ts').RawPart} RawPart
+ * @typedef {import('../data/parts.types.ts').NormalizedPart} NormalizedPart
  */
 
 /** Throws on invalid parts. Pads rows to uniform width. */

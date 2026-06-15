@@ -9,10 +9,10 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["head", "hair", "eyes", "nose", "mouth"]
+        "enum": ["head", "eyes", "nose", "mouth"]
       },
-      "minItems": 5,
-      "maxItems": 5
+      "minItems": 4,
+      "maxItems": 4
     },
     "parts": {
       "type": "array",
@@ -32,15 +32,15 @@
         },
         "category": {
           "type": "string",
-          "enum": ["head", "hair", "eyes", "nose", "mouth"]
+          "enum": ["head", "eyes", "nose", "mouth"]
         },
         "anchor": {
           "type": "object",
           "required": ["x", "y"],
           "additionalProperties": false,
           "properties": {
-            "x": { "type": "integer", "minimum": 0, "maximum": 23 },
-            "y": { "type": "integer", "minimum": 0, "maximum": 15 }
+            "x": { "type": "integer", "minimum": 0, "maximum": 19 },
+            "y": { "type": "integer", "minimum": 0, "maximum": 11 }
           }
         },
         "rows": {
