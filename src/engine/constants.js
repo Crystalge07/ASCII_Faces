@@ -2,7 +2,24 @@ export const CANVAS_W = 20;
 export const CANVAS_H = 12;
 
 // z-order: index 0 paints first (underneath), last paints on top.
-export const LAYER_ORDER = ['head', 'eyes', 'nose', 'mouth'];
+export const LAYER_ORDER = [
+  'head',
+  'hair',
+  'eyes',
+  'nose',
+  'mouth',
+  'facial_hair',
+];
+
+// UI tab order (paint order differs so hair sits under features).
+export const CATEGORY_ORDER = [
+  'head',
+  'eyes',
+  'nose',
+  'mouth',
+  'hair',
+  'facial_hair',
+];
 
 // Authored space handling — see "Transparency" in spec.
 export const TRANSPARENT_CHAR = ' '; // a space in a part = leave cell underneath

@@ -1,4 +1,10 @@
-export type PartCategory = 'head' | 'eyes' | 'nose' | 'mouth';
+export type PartCategory =
+  | 'head'
+  | 'eyes'
+  | 'nose'
+  | 'mouth'
+  | 'hair'
+  | 'facial_hair';
 
 export interface PartAnchor {
   x: number;

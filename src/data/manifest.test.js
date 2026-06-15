@@ -17,7 +17,7 @@ describe('parts manifest', () => {
   });
 
   it('every part passes normalizePart without throwing', () => {
-    expect(manifest.parts).toHaveLength(20);
+    expect(manifest.parts).toHaveLength(40);
 
     const ids = new Set();
     /** @type {{ id: string, error: string }[]} */
@@ -69,11 +69,17 @@ describe('parts manifest', () => {
   });
 
   it('horizontally centers heads and features on FACE_CENTER_X', () => {
-    const centered = manifest.parts
-      .filter((p) => ['head', 'eyes', 'nose', 'mouth'].includes(p.category))
-      .map(normalizePart);
+    const symmetric = new Set(['eyes', 'mouth', 'hair', 'facial_hair']);
 
-    for (const part of centered) {
+    for (const part of manifest.parts.map(normalizePart)) {
+      if (!part.rows.some((line) => [...line].some((ch) => ch !== ' '))) continue;
+
+      if (symmetric.has(part.category)) {
+        const slotCenter = part.anchor.x + (part.width - 1) / 2;
+        expect(Math.abs(slotCenter - FACE_CENTER_X)).toBeLessThanOrEqual(0.5);
+        continue;
+      }
+
       let inkLeft = Infinity;
       let inkRight = -1;
       part.rows.forEach((line) => {

@@ -1,4 +1,8 @@
-import { LAYER_ORDER } from '../engine/constants.js';
+import { CATEGORY_ORDER } from '../engine/constants.js';
+
+function categoryLabel(category) {
+  return category.replace(/_/g, ' ');
+}
 
 /**
  * @param {{
@@ -11,7 +15,7 @@ export function CategoryTabs({ activeCategory, onCategoryChange }) {
     <div className="category-bar">
       <p className="terminal-label">{'// layer'}</p>
       <nav className="category-tabs" aria-label="Face part categories">
-        {LAYER_ORDER.map((category) => (
+        {CATEGORY_ORDER.map((category) => (
           <button
             key={category}
             type="button"
@@ -19,7 +23,7 @@ export function CategoryTabs({ activeCategory, onCategoryChange }) {
             aria-current={category === activeCategory ? 'page' : undefined}
             onClick={() => onCategoryChange(category)}
           >
-            {category}
+            {categoryLabel(category)}
           </button>
         ))}
       </nav>

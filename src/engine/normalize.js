@@ -1,6 +1,15 @@
 import { CANVAS_W, CANVAS_H, HEAD_CHIN_ROW, FACE_CENTER_X } from './constants.js';
 
 /** @param {string[]} rows */
+function hasInk(rows) {
+  for (const line of rows) {
+    for (const ch of line) {
+      if (ch !== ' ') return true;
+    }
+  }
+  return false;
+}
+/** @param {string[]} rows */
 function inkBounds(rows) {
   let inkTop = rows.length;
   let inkBottom = -1;
@@ -24,6 +33,18 @@ function inkBounds(rows) {
 function centeredAnchorX(inkLeft, inkRight) {
   return Math.round(FACE_CENTER_X - (inkLeft + inkRight) / 2);
 }
+
+/** Center a part's full row width on the face (symmetric features). */
+function centeredAnchorXByWidth(width) {
+  return Math.round(FACE_CENTER_X - (width - 1) / 2);
+}
+
+const SYMMETRIC_FACE_CATEGORIES = new Set([
+  'eyes',
+  'mouth',
+  'hair',
+  'facial_hair',
+]);
 
 /**
  * @typedef {import('../data/parts.types.ts').RawPart} RawPart
@@ -50,18 +71,24 @@ export function normalizePart(p) {
   const rows = p.rows.map((r) => r.padEnd(width, ' '));
 
   let anchor = { ...p.anchor };
-  const bounds = inkBounds(rows);
-
-  if (p.category === 'head') {
-    anchor = {
-      x: centeredAnchorX(bounds.inkLeft, bounds.inkRight),
-      y: HEAD_CHIN_ROW - bounds.inkBottom,
-    };
-  } else if (p.category === 'eyes' || p.category === 'nose' || p.category === 'mouth') {
-    anchor = {
-      ...anchor,
-      x: centeredAnchorX(bounds.inkLeft, bounds.inkRight),
-    };
+  if (hasInk(rows)) {
+    const bounds = inkBounds(rows);
+    if (p.category === 'head') {
+      anchor = {
+        x: centeredAnchorX(bounds.inkLeft, bounds.inkRight),
+        y: HEAD_CHIN_ROW - bounds.inkBottom,
+      };
+    } else if (p.category === 'nose') {
+      anchor = {
+        ...anchor,
+        x: centeredAnchorX(bounds.inkLeft, bounds.inkRight),
+      };
+    } else if (SYMMETRIC_FACE_CATEGORIES.has(p.category)) {
+      anchor = {
+        ...anchor,
+        x: centeredAnchorXByWidth(width),
+      };
+    }
   }
 
   // bounds check against canvas

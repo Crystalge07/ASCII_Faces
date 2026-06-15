@@ -1,5 +1,5 @@
 import { composite } from '../engine/composite.js';
-import { LAYER_ORDER } from '../engine/constants.js';
+import { CATEGORY_ORDER } from '../engine/constants.js';
 
 /**
  * @param {{
@@ -18,13 +18,17 @@ export function Gallery({
   select,
 }) {
   const variants = partsByCategory[activeCategory] ?? [];
-  const others = LAYER_ORDER.filter((cat) => cat !== activeCategory)
+  const others = CATEGORY_ORDER.filter((cat) => cat !== activeCategory)
     .map((cat) => partsById[selection[cat]])
     .filter(Boolean);
 
   return (
     <section className="gallery-section">
-      <div className="gallery" role="listbox" aria-label={`${activeCategory} variants`}>
+      <div
+        className={variants.length > 5 ? 'gallery gallery-grid' : 'gallery'}
+        role="listbox"
+        aria-label={`${activeCategory} variants`}
+      >
         {variants.map((variant) => {
           const preview = composite([...others, variant]);
           const isSelected = selection[activeCategory] === variant.id;

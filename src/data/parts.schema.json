@@ -9,10 +9,10 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["head", "eyes", "nose", "mouth"]
+        "enum": ["head", "eyes", "nose", "mouth", "hair", "facial_hair"]
       },
-      "minItems": 4,
-      "maxItems": 4
+      "minItems": 6,
+      "maxItems": 6
     },
     "parts": {
       "type": "array",
@@ -32,7 +32,7 @@
         },
         "category": {
           "type": "string",
-          "enum": ["head", "eyes", "nose", "mouth"]
+          "enum": ["head", "eyes", "nose", "mouth", "hair", "facial_hair"]
         },
         "anchor": {
           "type": "object",

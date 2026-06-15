@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { loadManifestData } from '../data/manifestData.js';
 import { composite } from '../engine/composite.js';
-import { LAYER_ORDER } from '../engine/constants.js';
+import { LAYER_ORDER, CATEGORY_ORDER } from '../engine/constants.js';
 import { decode, encode } from '../engine/serialize.js';
 import { useFaceState } from '../state/useFaceState.js';
 import { AsciiTitle } from './AsciiTitle.jsx';
@@ -13,7 +13,7 @@ const manifestData = loadManifestData();
 
 function validateSelection(raw, partsById, defaults) {
   const out = { ...defaults };
-  for (const cat of LAYER_ORDER) {
+  for (const cat of CATEGORY_ORDER) {
     const id = raw[cat];
     if (id && partsById[id]) {
       out[cat] = id;
@@ -92,7 +92,13 @@ function FaceEditor({ partsById, partsByCategory, defaults }) {
       <main className="app-main">
         <Canvas face={face} />
 
-        <div className="picker-panel">
+        <div
+          className={
+            (partsByCategory[activeCategory]?.length ?? 0) > 5
+              ? 'picker-panel picker-panel-grid'
+              : 'picker-panel'
+          }
+        >
           <CategoryTabs
             activeCategory={activeCategory}
             onCategoryChange={setActiveCategory}

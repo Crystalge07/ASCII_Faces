@@ -65,6 +65,16 @@ describe('normalizePart', () => {
       anchor: { x: 0, y: 5 },
       rows: ['.    .'],
     });
-    expect(eyes.anchor.x + 2.5).toBe(FACE_CENTER_X);
+    expect(eyes.anchor.x + (eyes.width - 1) / 2).toBe(FACE_CENTER_X);
+  });
+
+  it('allows asymmetric nose placement via ink centering', () => {
+    const nose = normalizePart({
+      id: 'nose',
+      category: 'nose',
+      anchor: { x: 0, y: 6 },
+      rows: ['J'],
+    });
+    expect(nose.anchor.x).toBe(10);
   });
 });

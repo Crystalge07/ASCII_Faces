@@ -5,8 +5,8 @@ describe('serialize', () => {
   it('round-trips selection via encode/decode', () => {
     const selection = {
       head: 'head_01',
-      eyes: 'eyes_round_01',
-      mouth: 'mouth_smile_01',
+      eyes: 'eyes_awake_01',
+      mouth: 'mouth_neutral_01',
     };
     expect(decode(encode(selection))).toEqual(selection);
   });
