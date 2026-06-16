@@ -9,7 +9,7 @@ export const FAVICON_FACE = {
   eyes: 'eyes_micro_01',
   nose: 'nose_curl_01',
   mouth: 'mouth_frown_01',
-  hair: 'hair_boy_bald_01',
+  hair: 'hair_bald_01',
   facial_hair: 'facial_hair_none_01',
 };
 

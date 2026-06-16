@@ -1,5 +1,5 @@
 export const CANVAS_W = 20;
-export const CANVAS_H = 14;
+export const CANVAS_H = 20;
 
 // z-order: index 0 paints first (underneath), last paints on top.
 export const LAYER_ORDER = [
@@ -25,7 +25,7 @@ export const CATEGORY_ORDER = [
 export const TRANSPARENT_CHAR = ' '; // a space in a part = leave cell underneath
 
 // Canvas row where the bottom ink line of every head should land (0-indexed).
-export const HEAD_CHIN_ROW = 11;
+export const HEAD_CHIN_ROW = 17;
 
 // Horizontal center of the face canvas (between columns 9 and 10 on a 20-wide grid).
 export const FACE_CENTER_X = (CANVAS_W - 1) / 2;

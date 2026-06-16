@@ -40,7 +40,7 @@
           "additionalProperties": false,
           "properties": {
             "x": { "type": "integer", "minimum": 0, "maximum": 19 },
-            "y": { "type": "integer", "minimum": 0, "maximum": 11 }
+            "y": { "type": "integer", "minimum": 0, "maximum": 19 }
           }
         },
         "rows": {

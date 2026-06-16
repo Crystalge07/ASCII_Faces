@@ -9,13 +9,26 @@ function headInkTop(head) {
   return top;
 }
 
+/** Row within the part that should sit just above the head crown (flowing styles). */
+const HAIR_CROWN_SEAT_ROW = {
+  hair_long_side_01: 1,
+  hair_bangs_01: 0,
+  hair_ponytail_01: 2,
+};
+
 /** @param {import('./normalize.js').NormalizedPart} hair */
-function hairInkBottom(hair) {
+function hairInkBottomRow(hair) {
   let bottom = -1;
   hair.rows.forEach((line, r) => {
-    if ([...line].some((ch) => ch !== ' ')) bottom = Math.max(bottom, hair.anchor.y + r);
+    if ([...line].some((ch) => ch !== ' ')) bottom = r;
   });
   return bottom;
+}
+
+/** @param {import('./normalize.js').NormalizedPart} hair */
+function hairSeatRow(hair) {
+  if (hair.id in HAIR_CROWN_SEAT_ROW) return HAIR_CROWN_SEAT_ROW[hair.id];
+  return hairInkBottomRow(hair);
 }
 
 /** Seat hair on the head crown so it does not float above shorter heads. */
@@ -27,8 +40,9 @@ export function alignHairToHead(parts) {
   const hair = parts[hairIdx];
   if (!hair.rows.some((line) => [...line].some((ch) => ch !== ' '))) return parts;
 
-  const targetBottom = headInkTop(head) - 1;
-  const dy = targetBottom - hairInkBottom(hair);
+  const targetSeat = headInkTop(head) - 1;
+  const seatRow = hairSeatRow(hair);
+  const dy = targetSeat - (hair.anchor.y + seatRow);
   if (dy === 0) return parts;
 
   const aligned = [...parts];

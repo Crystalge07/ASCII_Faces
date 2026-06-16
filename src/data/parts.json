@@ -122,7 +122,7 @@
       "category": "eyes",
       "anchor": {
         "x": 7,
-        "y": 5
+        "y": 11
       },
       "rows": [
         "o    o"
@@ -133,7 +133,7 @@
       "category": "eyes",
       "anchor": {
         "x": 7,
-        "y": 5
+        "y": 11
       },
       "rows": [
         "^    ^"
@@ -144,7 +144,7 @@
       "category": "eyes",
       "anchor": {
         "x": 7,
-        "y": 5
+        "y": 11
       },
       "rows": [
         "-    o"
@@ -155,7 +155,7 @@
       "category": "eyes",
       "anchor": {
         "x": 7,
-        "y": 5
+        "y": 11
       },
       "rows": [
         "-    -"
@@ -166,7 +166,7 @@
       "category": "eyes",
       "anchor": {
         "x": 7,
-        "y": 5
+        "y": 11
       },
       "rows": [
         "0    0"
@@ -177,7 +177,7 @@
       "category": "eyes",
       "anchor": {
         "x": 7,
-        "y": 5
+        "y": 11
       },
       "rows": [
         "x    x"
@@ -188,7 +188,7 @@
       "category": "eyes",
       "anchor": {
         "x": 7,
-        "y": 5
+        "y": 11
       },
       "rows": [
         "~    ~"
@@ -199,7 +199,7 @@
       "category": "eyes",
       "anchor": {
         "x": 7,
-        "y": 5
+        "y": 11
       },
       "rows": [
         ">    <"
@@ -210,7 +210,7 @@
       "category": "eyes",
       "anchor": {
         "x": 7,
-        "y": 5
+        "y": 11
       },
       "rows": [
         "=    ="
@@ -221,7 +221,7 @@
       "category": "eyes",
       "anchor": {
         "x": 7,
-        "y": 5
+        "y": 11
       },
       "rows": [
         ".    ."
@@ -232,7 +232,7 @@
       "category": "nose",
       "anchor": {
         "x": 9,
-        "y": 6
+        "y": 12
       },
       "rows": [
         ".."
@@ -243,7 +243,7 @@
       "category": "nose",
       "anchor": {
         "x": 9,
-        "y": 6
+        "y": 12
       },
       "rows": [
         "||"
@@ -254,7 +254,7 @@
       "category": "nose",
       "anchor": {
         "x": 10,
-        "y": 6
+        "y": 12
       },
       "rows": [
         "J"
@@ -265,7 +265,7 @@
       "category": "nose",
       "anchor": {
         "x": 8,
-        "y": 6
+        "y": 12
       },
       "rows": [
         "/\\"
@@ -276,7 +276,7 @@
       "category": "nose",
       "anchor": {
         "x": 9,
-        "y": 6
+        "y": 12
       },
       "rows": [
         "vv"
@@ -287,7 +287,7 @@
       "category": "mouth",
       "anchor": {
         "x": 7,
-        "y": 7
+        "y": 13
       },
       "rows": [
         "  ----  "
@@ -298,7 +298,7 @@
       "category": "mouth",
       "anchor": {
         "x": 7,
-        "y": 7
+        "y": 13
       },
       "rows": [
         " \\^^/ "
@@ -309,7 +309,7 @@
       "category": "mouth",
       "anchor": {
         "x": 7,
-        "y": 7
+        "y": 13
       },
       "rows": [
         " /--\\ "
@@ -320,7 +320,7 @@
       "category": "mouth",
       "anchor": {
         "x": 7,
-        "y": 7
+        "y": 13
       },
       "rows": [
         "  ()  "
@@ -331,7 +331,7 @@
       "category": "mouth",
       "anchor": {
         "x": 7,
-        "y": 6
+        "y": 12
       },
       "rows": [
         " ____ ",
@@ -343,7 +343,7 @@
       "category": "mouth",
       "anchor": {
         "x": 7,
-        "y": 7
+        "y": 13
       },
       "rows": [
         "  /\\  "
@@ -354,7 +354,7 @@
       "category": "mouth",
       "anchor": {
         "x": 7,
-        "y": 7
+        "y": 13
       },
       "rows": [
         "   ~~   "
@@ -365,7 +365,7 @@
       "category": "mouth",
       "anchor": {
         "x": 7,
-        "y": 7
+        "y": 13
       },
       "rows": [
         "  ====  "
@@ -376,7 +376,7 @@
       "category": "mouth",
       "anchor": {
         "x": 7,
-        "y": 7
+        "y": 13
       },
       "rows": [
         " \\--/ "
@@ -387,135 +387,143 @@
       "category": "mouth",
       "anchor": {
         "x": 7,
-        "y": 7
+        "y": 13
       },
       "rows": [
         " \\____/ "
       ]
     },
     {
-      "id": "hair_girl_long_side_01",
+      "id": "hair_long_side_01",
       "category": "hair",
       "anchor": {
-        "x": 0,
-        "y": 0
+        "x": 3,
+        "y": 1
       },
       "rows": [
-        "  ~~\\      ",
-        " /~~~~~\\    ",
-        "|~~~~~~~|    ",
-        " \\~~~~~/    "
+        " _/~~~~~~~\\_ ",
+        "((          ))",
+        "||          ||",
+        "||          ||",
+        "||          ||",
+        "||          ||"
       ]
     },
     {
-      "id": "hair_girl_bangs_01",
+      "id": "hair_bangs_01",
       "category": "hair",
       "anchor": {
-        "x": 0,
-        "y": 0
+        "x": 5,
+        "y": 1
       },
       "rows": [
-        " /~~~~~~~\\ ",
-        " |```````|  "
+        " ,~~~~~~, ",
+        "||      ||",
+        "||      ||",
+        "||      ||",
+        "||      ||"
       ]
     },
     {
-      "id": "hair_girl_ponytail_01",
+      "id": "hair_ponytail_01",
       "category": "hair",
       "anchor": {
-        "x": 0,
+        "x": 3,
         "y": 0
       },
       "rows": [
-        "  /~~~~\\   ",
-        " |~~~~~~|    ",
-        "   \\~~~/    "
+        "      __      ",
+        "  ,~~(  )~,   ",
+        " /~~~~~~~~\\  ",
+        "||          ||",
+        "||          ||",
+        "||          ||",
+        "||         // "
       ]
     },
     {
-      "id": "hair_girl_buns_01",
+      "id": "hair_buns_01",
       "category": "hair",
       "anchor": {
-        "x": 0,
+        "x": 4,
         "y": 0
       },
       "rows": [
-        " o     o    ",
-        "( \\~~// )  ",
-        " |  ~~  |   "
+        " (o)    (o) ",
+        "  \\~~~~~~/  "
       ]
     },
     {
-      "id": "hair_girl_afro_01",
+      "id": "hair_afro_01",
       "category": "hair",
       "anchor": {
-        "x": 0,
+        "x": 2,
         "y": 0
       },
       "rows": [
-        "  .~~~~.    ",
-        " /~~~~~~\\  ",
-        "|~~~~~~~~|  ",
-        " \\______/  "
+        "  .@@@@@@@@@@.  ",
+        " @@@@@@@@@@@@@@ ",
+        "@@@@@@@@@@@@@@@@",
+        " @@@@@@@@@@@@@@ ",
+        "  '~~~~~~~~~~'  "
       ]
     },
     {
-      "id": "hair_boy_side_part_01",
+      "id": "hair_buzz_01",
       "category": "hair",
       "anchor": {
-        "x": 0,
-        "y": 0
+        "x": 5,
+        "y": 1
       },
       "rows": [
-        "  /\\~~~~\\ ",
-        " /  ~~~~~\\ "
+        ".::::::::."
       ]
     },
     {
-      "id": "hair_boy_spiky_01",
+      "id": "hair_spiky_01",
       "category": "hair",
       "anchor": {
-        "x": 0,
+        "x": 5,
         "y": 0
       },
       "rows": [
-        " /\\ /\\ /\\ ",
-        " \\       / "
+        " \\|/\\|/\\|/ ",
+        "  ^^^^^^^  "
       ]
     },
     {
-      "id": "hair_boy_bald_01",
+      "id": "hair_bald_01",
       "category": "hair",
       "anchor": {
-        "x": 0,
-        "y": 0
+        "x": 6,
+        "y": 2
       },
       "rows": [
-        " "
+        "        "
       ]
     },
     {
-      "id": "hair_boy_middle_part_01",
+      "id": "hair_middle_01",
       "category": "hair",
       "anchor": {
-        "x": 0,
-        "y": 0
+        "x": 5,
+        "y": 1
       },
       "rows": [
-        "  /\\  /\\   ",
-        " /~~~~~~~~\\ "
+        ",~~~\\/~~~,",
+        "|___||___|"
       ]
     },
     {
-      "id": "hair_boy_messy_01",
+      "id": "hair_messy_01",
       "category": "hair",
       "anchor": {
-        "x": 0,
+        "x": 4,
         "y": 0
       },
       "rows": [
-        " \\~~/\\~~/\\ ",
-        "  \\~~~~~/  "
+        "  ,'`,~,'`,  ",
+        " }~~`~~`~~{ "
       ]
     },
     {
@@ -534,7 +542,7 @@
       "category": "facial_hair",
       "anchor": {
         "x": 6,
-        "y": 7
+        "y": 13
       },
       "rows": [
         "  \\____/  "
@@ -545,7 +553,7 @@
       "category": "facial_hair",
       "anchor": {
         "x": 6,
-        "y": 8
+        "y": 14
       },
       "rows": [
         "  (    )  ",
@@ -557,7 +565,7 @@
       "category": "facial_hair",
       "anchor": {
         "x": 8,
-        "y": 8
+        "y": 14
       },
       "rows": [
         "    |     ",
@@ -569,7 +577,7 @@
       "category": "facial_hair",
       "anchor": {
         "x": 5,
-        "y": 7
+        "y": 13
       },
       "rows": [
         "  \\~~~~/  ",

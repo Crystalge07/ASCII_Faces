@@ -74,7 +74,7 @@ describe('composite', () => {
       rows: ['  .--.  ', ' /    \\ ', ' |    | ', '  \\__/  '],
     });
     const hair = normalizePart({
-      id: 'hair_boy_spiky_01',
+      id: 'hair_spiky_01',
       category: 'hair',
       anchor: { x: 0, y: 0 },
       rows: [' /\\ ', ' \\__ '],
