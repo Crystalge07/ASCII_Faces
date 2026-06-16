@@ -17,7 +17,7 @@ describe('parts manifest', () => {
   });
 
   it('every part passes normalizePart without throwing', () => {
-    expect(manifest.parts).toHaveLength(41);
+    expect(manifest.parts).toHaveLength(46);
 
     const ids = new Set();
     /** @type {{ id: string, error: string }[]} */
@@ -70,7 +70,7 @@ describe('parts manifest', () => {
   });
 
   it('horizontally centers heads and features on FACE_CENTER_X', () => {
-    const symmetric = new Set(['eyes', 'hair', 'facial_hair']);
+    const symmetric = new Set(['eyes', 'facial_hair']);
 
     for (const part of manifest.parts.map(normalizePart)) {
       if (!part.rows.some((line) => [...line].some((ch) => ch !== ' '))) continue;
@@ -98,6 +98,10 @@ describe('parts manifest', () => {
         const inkWidth = inkRight - inkLeft + 1;
         expect(inkWidth % 2).toBe(0);
         expect(inkCenter).toBe(FACE_CENTER_X);
+      }
+
+      if (part.category === 'hair') {
+        expect(Math.abs(inkCenter - FACE_CENTER_X)).toBeLessThanOrEqual(0.5);
       }
 
       if (part.category === 'nose' && part.id !== 'nose_curl_01') {

@@ -394,7 +394,97 @@
       ]
     },
     {
-      "id": "hair_none_01",
+      "id": "hair_girl_long_side_01",
+      "category": "hair",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "rows": [
+        "  ~~\\      ",
+        " /~~~~~\\    ",
+        "|~~~~~~~|    ",
+        " \\~~~~~/    "
+      ]
+    },
+    {
+      "id": "hair_girl_bangs_01",
+      "category": "hair",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "rows": [
+        " /~~~~~~~\\ ",
+        " |```````|  "
+      ]
+    },
+    {
+      "id": "hair_girl_ponytail_01",
+      "category": "hair",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "rows": [
+        "  /~~~~\\   ",
+        " |~~~~~~|    ",
+        "   \\~~~/    "
+      ]
+    },
+    {
+      "id": "hair_girl_buns_01",
+      "category": "hair",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "rows": [
+        " o     o    ",
+        "( \\~~// )  ",
+        " |  ~~  |   "
+      ]
+    },
+    {
+      "id": "hair_girl_afro_01",
+      "category": "hair",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "rows": [
+        "  .~~~~.    ",
+        " /~~~~~~\\  ",
+        "|~~~~~~~~|  ",
+        " \\______/  "
+      ]
+    },
+    {
+      "id": "hair_boy_side_part_01",
+      "category": "hair",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "rows": [
+        "  /\\~~~~\\ ",
+        " /  ~~~~~\\ "
+      ]
+    },
+    {
+      "id": "hair_boy_spiky_01",
+      "category": "hair",
+      "anchor": {
+        "x": 0,
+        "y": 0
+      },
+      "rows": [
+        " /\\ /\\ /\\ ",
+        " \\       / "
+      ]
+    },
+    {
+      "id": "hair_boy_bald_01",
       "category": "hair",
       "anchor": {
         "x": 0,
@@ -405,51 +495,26 @@
       ]
     },
     {
-      "id": "hair_short_01",
+      "id": "hair_boy_middle_part_01",
       "category": "hair",
       "anchor": {
-        "x": 4,
-        "y": 1
+        "x": 0,
+        "y": 0
       },
       "rows": [
-        " .--------. ",
+        "  /\\  /\\   ",
         " /~~~~~~~~\\ "
       ]
     },
     {
-      "id": "hair_parted_01",
+      "id": "hair_boy_messy_01",
       "category": "hair",
       "anchor": {
-        "x": 4,
+        "x": 0,
         "y": 0
       },
       "rows": [
-        "  /\\    /\\  ",
-        " /        \\ ",
-        "  ~~~~~~~~  "
-      ]
-    },
-    {
-      "id": "hair_spiky_01",
-      "category": "hair",
-      "anchor": {
-        "x": 4,
-        "y": 0
-      },
-      "rows": [
-        " /\\ /\\ /\\ ",
-        " \\       / "
-      ]
-    },
-    {
-      "id": "hair_messy_01",
-      "category": "hair",
-      "anchor": {
-        "x": 4,
-        "y": 0
-      },
-      "rows": [
-        " ~\\/\\~\\/\\~ ",
+        " \\~~/\\~~/\\ ",
         "  \\~~~~~/  "
       ]
     },

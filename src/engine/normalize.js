@@ -44,9 +44,9 @@ function centeredAnchorXByWidth(width) {
   return Math.round(FACE_CENTER_X - (width - 1) / 2);
 }
 
-const SYMMETRIC_FACE_CATEGORIES = new Set(['eyes', 'hair', 'facial_hair']);
+const SYMMETRIC_FACE_CATEGORIES = new Set(['eyes', 'facial_hair']);
 
-const INK_CENTERED_FACE_CATEGORIES = new Set(['nose', 'mouth']);
+const INK_CENTERED_FACE_CATEGORIES = new Set(['nose', 'mouth', 'hair']);
 
 /**
  * @typedef {import('../data/parts.types.ts').RawPart} RawPart

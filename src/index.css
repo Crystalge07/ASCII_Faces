@@ -13,7 +13,7 @@
   --ui-size: 14px;
   --ui-line: 1.05;
   --preview-size: 10px;
-  --canvas-rows: 12;
+  --canvas-rows: 14;
   --canvas-cols: 20;
 }
 
@@ -89,13 +89,35 @@ body {
 
 .picker-panel-grid {
   gap: 0.4rem;
+  width: 100%;
+  padding-bottom: 1.5rem;
+}
+
+.picker-panel-grid .gallery-section {
+  overflow-x: auto;
+  overflow-y: visible;
+  max-width: 100%;
+}
+
+.picker-panel-grid .gallery-grid {
+  row-gap: 1rem;
+  align-items: start;
+}
+
+.picker-panel-grid .gallery-grid .variant:nth-child(n + 6) {
+  margin-top: 0;
+}
+
+.picker-panel-grid .variant-frame {
+  overflow: visible;
+  align-items: flex-start;
 }
 
 .canvas-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
 }
 
@@ -126,16 +148,16 @@ body {
 
 .canvas-stage {
   padding: 0.75rem 0;
-  overflow: hidden;
+  overflow: visible;
   height: calc(var(--canvas-rows) * var(--ui-line) * var(--ui-size));
   width: calc(var(--canvas-cols) * 1ch);
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .canvas-face {
-  overflow: hidden;
+  overflow: visible;
   width: calc(var(--canvas-cols) * 1ch);
   height: calc(var(--canvas-rows) * var(--ui-line) * var(--ui-size));
   margin: 0;
@@ -240,11 +262,6 @@ body {
   justify-content: center;
   row-gap: 0;
   column-gap: 0.75rem;
-}
-
-/* faces sit at the bottom of each preview — pull row 2 up into row 1's empty top */
-.gallery-grid .variant:nth-child(n + 6) {
-  margin-top: calc(-3.25 * var(--ui-line) * var(--preview-size));
 }
 
 .variant {

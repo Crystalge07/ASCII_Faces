@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { composite } from './composite.js';
+import { composite, alignHairToHead } from './composite.js';
 import { CANVAS_W, CANVAS_H, HEAD_CHIN_ROW } from './constants.js';
 import { normalizePart } from './normalize.js';
 
@@ -64,5 +64,35 @@ describe('composite', () => {
     const rows = result.split('\n');
     expect(rows[CANVAS_H - 1]).toBe(' '.repeat(CANVAS_W - 2) + 'AB');
     expect(rows[CANVAS_H - 1].length).toBe(CANVAS_W);
+  });
+
+  it('seats hair on the head crown', () => {
+    const head = normalizePart({
+      id: 'head_round_01',
+      category: 'head',
+      anchor: { x: 4, y: 2 },
+      rows: ['  .--.  ', ' /    \\ ', ' |    | ', '  \\__/  '],
+    });
+    const hair = normalizePart({
+      id: 'hair_boy_spiky_01',
+      category: 'hair',
+      anchor: { x: 0, y: 0 },
+      rows: [' /\\ ', ' \\__ '],
+    });
+
+    let headTop = Infinity;
+    head.rows.forEach((line, r) => {
+      if ([...line].some((ch) => ch !== ' ')) headTop = Math.min(headTop, head.anchor.y + r);
+    });
+
+    const alignedHair = alignHairToHead([hair, head]).find((p) => p.category === 'hair');
+    let hairBottom = -1;
+    alignedHair.rows.forEach((line, r) => {
+      if ([...line].some((ch) => ch !== ' ')) {
+        hairBottom = Math.max(hairBottom, alignedHair.anchor.y + r);
+      }
+    });
+
+    expect(hairBottom).toBe(headTop - 1);
   });
 });
