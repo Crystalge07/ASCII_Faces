@@ -94,14 +94,14 @@ body {
 }
 
 .picker-panel-grid .gallery-section {
-  overflow-x: auto;
-  overflow-y: visible;
+  overflow: visible;
   max-width: 100%;
 }
 
 .picker-panel-grid .gallery-grid {
   row-gap: 1rem;
   align-items: start;
+  min-height: calc(2 * var(--canvas-rows) * var(--ui-line) * var(--preview-size) + 1rem);
 }
 
 .picker-panel-grid .gallery-grid .variant:nth-child(n + 6) {
@@ -110,7 +110,7 @@ body {
 
 .picker-panel-grid .variant-frame {
   overflow: visible;
-  align-items: flex-start;
+  align-items: flex-end;
 }
 
 .canvas-section {

@@ -80,8 +80,22 @@ function FaceEditor({ partsById, partsByCategory, defaults }) {
   const copyToClipboard = useCallback(async () => {
     window.getSelection()?.removeAllRanges();
     try {
-      await navigator.clipboard.writeText(face);
-      showStatus('OK: face copied to clipboard');
+      // Prefer rich clipboard (HTML + plain text) to preserve spacing in more apps.
+      if (window.ClipboardItem && navigator.clipboard.write) {
+        const html = `<pre>${face
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')}</pre>`;
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            'text/plain': new Blob([face], { type: 'text/plain' }),
+            'text/html': new Blob([html], { type: 'text/html' }),
+          }),
+        ]);
+      } else {
+        await navigator.clipboard.writeText(face);
+      }
+      showStatus('OK: face copied');
     } catch {
       showStatus('ERR: copy failed');
     }
